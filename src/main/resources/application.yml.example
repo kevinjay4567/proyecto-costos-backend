@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/costosdb
+    username: root
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+  flyway:
+    url: jdbc:postgresql://localhost:5432/costosdb
+    user: root
+    password:
+    baseline-on-migrate: true
