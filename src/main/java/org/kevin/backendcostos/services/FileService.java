@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.Objects;
 
 @RequiredArgsConstructor
@@ -20,6 +21,10 @@ import java.util.Objects;
 public class FileService {
 
     private final FileRepository fileRepository;
+
+    public List<File> getAllFiles() {
+        return fileRepository.findAll();
+    }
 
     /**
      * Controla que funcion de guardado se debe ejecutar dependiendo la extension

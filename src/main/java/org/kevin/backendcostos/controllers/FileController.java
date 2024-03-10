@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,11 +16,9 @@ public class FileController {
 
     private final FileService fileService;
 
-    static List<File> files = new ArrayList<>();
-
     @GetMapping("/files")
     public ResponseEntity<List<File>> getAllFiles() {
-        return ResponseEntity.ok(files);
+        return ResponseEntity.ok(fileService.getAllFiles());
     }
 
     @PostMapping("/file")
