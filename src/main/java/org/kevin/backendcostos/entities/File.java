@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class File {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JsonProperty("file_name")

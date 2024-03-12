@@ -55,15 +55,13 @@ public class FileService {
             XSSFSheet sheet = book.getSheetAt(0);
 
             if (sheet != null) {
-
                 File newFile = new File();
                 newFile.setFileName(file.getOriginalFilename());
                 newFile.setTotalRegisters(sheet.getLastRowNum());
 
                 fileRepository.save(newFile);
 
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body("Archivo agregado correctamente");
+                return ResponseEntity.ok("Archivo agregado correctamente");
             } else {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body("Hoja no encontrada en el archivo");
@@ -88,15 +86,13 @@ public class FileService {
             HSSFSheet sheet = book.getSheetAt(0);
 
             if (sheet != null) {
-
                 File newFile = new File();
                 newFile.setFileName(file.getOriginalFilename());
                 newFile.setTotalRegisters(sheet.getLastRowNum());
 
                 fileRepository.save(newFile);
 
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body("Archivo agregado correctamente");
+                return ResponseEntity.ok("Archivo agregado correctamente");
             } else {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body("Hoja no encontrada en el archivo");
