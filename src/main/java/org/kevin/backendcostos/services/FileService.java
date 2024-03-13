@@ -5,6 +5,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.kevin.backendcostos.dto.OkResponseDto;
 import org.kevin.backendcostos.entities.File;
 import org.kevin.backendcostos.repositories.FileRepository;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,7 @@ import java.util.Objects;
 public class FileService {
 
     private final FileRepository fileRepository;
+    private final ExcelValidation excelValidation;
 
     public List<File> getAllFiles() {
         return fileRepository.findAll();
@@ -61,7 +63,9 @@ public class FileService {
 
                 fileRepository.save(newFile);
 
-                return ResponseEntity.ok("Archivo agregado correctamente");
+                excelValidation.Validate(sheet, Objects.requireNonNull(file.getOriginalFilename()));
+
+                return ResponseEntity.ok(new OkResponseDto("Archivo agregado correctamente").toString());
             } else {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body("Hoja no encontrada en el archivo");
