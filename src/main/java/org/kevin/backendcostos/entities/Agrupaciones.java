@@ -23,4 +23,7 @@ public class Agrupaciones {
 
     @Column(name = "agrupacion", nullable = false)
     private String agrupacion;
+
+    @Column(name = "anho", nullable = false)
+    private int anho;
 }
