@@ -11,4 +11,9 @@ public class AuthController {
     public ResponseEntity<String> index() {
         return ResponseEntity.ok("Hello world");
     }
+
+    @GetMapping("/auth/login")
+    public ResponseEntity<String> login() {
+        return ResponseEntity.ok("Login Page");
+    }
 }

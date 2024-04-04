@@ -1,11 +1,14 @@
 package org.kevin.backendcostos.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.kevin.backendcostos.entities.Agrupaciones;
+import org.kevin.backendcostos.dto.OkResponseDto;
+import org.kevin.backendcostos.entities.Agrupacion;
+import org.kevin.backendcostos.entities.Balance;
 import org.kevin.backendcostos.entities.DatosPersonas;
 import org.kevin.backendcostos.entities.File;
 import org.kevin.backendcostos.repositories.AgrupacionesRepository;
 import org.kevin.backendcostos.repositories.DatosPersonasRepository;
+import org.kevin.backendcostos.services.BalanceService;
 import org.kevin.backendcostos.services.DatosPersonasService;
 import org.kevin.backendcostos.services.FileService;
 import org.springframework.http.HttpStatus;
@@ -21,6 +24,7 @@ public class FileController {
 
     private final FileService fileService;
     private final DatosPersonasService datosPersonasService;
+    private final BalanceService balanceService;
     private final AgrupacionesRepository agrupacionesRepository;
     private final DatosPersonasRepository datosPersonasRepository;
 
@@ -30,8 +34,13 @@ public class FileController {
     }
 
     @GetMapping("/files/agrupaciones")
-    public ResponseEntity<List<Agrupaciones>> getAllAgrupaciones() {
+    public ResponseEntity<List<Agrupacion>> getAllAgrupaciones() {
         return ResponseEntity.ok(agrupacionesRepository.findAll());
+    }
+
+    @GetMapping("/files/balances")
+    public ResponseEntity<List<Balance>> getAllBalances() {
+        return ResponseEntity.ok(balanceService.getAll());
     }
 
     @GetMapping("/files/datospersonas")
@@ -47,7 +56,7 @@ public class FileController {
 
     @PostMapping("/file")
     public ResponseEntity<String> storeFile(@RequestPart("file") MultipartFile file) {
-        if (file == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al leer el archivo");
+        if (file.isEmpty()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new OkResponseDto("Error al leer el archivo").toString());
         return fileService.storeFile(file);
     }
 }

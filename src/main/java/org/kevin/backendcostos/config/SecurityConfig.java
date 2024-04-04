@@ -1,5 +1,6 @@
 package org.kevin.backendcostos.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -14,13 +16,17 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final UserAuthenticationEntryPoint userAuthenticationEntryPoint;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
+        http.exceptionHandling(customizer -> customizer.authenticationEntryPoint((userAuthenticationEntryPoint)))
+                .csrf(AbstractHttpConfigurer::disable)
                 .cors(customizer -> {
                     CorsConfiguration corsConfiguration = new CorsConfiguration();
                     corsConfiguration.setAllowCredentials(true);
@@ -43,7 +49,10 @@ public class SecurityConfig {
                     source.registerCorsConfiguration("/**", corsConfiguration);
 
                     customizer.configurationSource(source);
-                });
+                })
+                .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests((requests) -> requests.requestMatchers(HttpMethod.GET,"/auth/login", "/files/agrupaciones", "/files/balances").permitAll()
+                        .anyRequest().authenticated());
         return http.build();
     }
 }
