@@ -51,7 +51,7 @@ public class SecurityConfig {
                     customizer.configurationSource(source);
                 })
                 .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests((requests) -> requests.requestMatchers(HttpMethod.GET,"/auth/login", "/files/agrupaciones", "/files/balances").permitAll()
+                .authorizeHttpRequests((requests) -> requests.requestMatchers("/files/**", "/auth/login").permitAll()
                         .anyRequest().authenticated());
         return http.build();
     }

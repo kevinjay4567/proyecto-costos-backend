@@ -1,8 +1,6 @@
 package org.kevin.backendcostos.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,12 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-@Entity(name = "agrupacion")
-public class Agrupacion {
+@Entity(name = "sede")
+public class SedeEntity {
 
     @Id
     private Long id;
 
-    @Column(name = "nombre", nullable = false)
+    @Column(name = "nombre")
     private String nombre;
 }

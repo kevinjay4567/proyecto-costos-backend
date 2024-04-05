@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-@Entity(name = "empresa")
-public class Empresa {
+@Entity(name = "agrupacion")
+public class AgrupacionEntity {
 
     @Id
     private Long id;
 
-    @Column(name = "nombre")
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 }

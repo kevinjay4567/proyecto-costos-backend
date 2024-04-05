@@ -2,14 +2,11 @@ package org.kevin.backendcostos.services;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.kevin.backendcostos.repositories.AgrupacionesRepository;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
 public class AgrupacionesService {
-
-    private final AgrupacionesRepository agrupacionesRepository;
 
     public void storeAgrupaciones(XSSFSheet hoja) {
 
