@@ -16,20 +16,6 @@ public class BalanceValidationImpl implements BalanceValidation {
 
     private final Map<String, String> errors = new HashMap<>();
 
-    private enum Headers {
-        ANHO,
-        SEDE,
-        EMPRESA,
-        NOMBRE_EMPRESA,
-        CLASE,
-        GRUPO,
-        CUENTA,
-        SUBCUENTA,
-        CONCEPTO,
-        DESCRIPCION,
-        VALOR
-    }
-
     @Override
     public Map<String, String> validateBalance(HSSFSheet sheet, String fileName) {
 
@@ -59,15 +45,16 @@ public class BalanceValidationImpl implements BalanceValidation {
         return errors;
     }
 
+    // TODO: Extraer este metodo a una clase aparte
     private void validateBalanceHeader(HSSFSheet sheet) {
         Row header = sheet.getRow(0);
 
         for (int i = 0; i < header.getLastCellNum(); i++) {
             Cell cell = header.getCell(i);
 
-            if (!cell.getStringCellValue().equals(Headers.values()[i].toString())) {
+            if (!cell.getStringCellValue().equals(BalanceHeaders.values()[i].toString())) {
                 errors.put(cell.getAddress().toString(), "Texto de encabezado incorrecto. Debe ser: "
-                        + Headers.values()[i]);
+                        + BalanceHeaders.values()[i]);
             }
         }
     }

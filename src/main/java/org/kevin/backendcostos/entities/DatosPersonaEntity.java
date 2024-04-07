@@ -1,6 +1,8 @@
 package org.kevin.backendcostos.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,11 +13,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-@Entity(name = "aaa")
-public class DatosPersonas {
+@Entity(name = "datos_persona")
+public class DatosPersonaEntity {
 
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     private String sede;
 
@@ -27,10 +30,7 @@ public class DatosPersonas {
 
     private String programa;
 
-    private double promedio;
+    private float promedio;
 
     private String nivel;
-
-    private int anho;
-
 }
