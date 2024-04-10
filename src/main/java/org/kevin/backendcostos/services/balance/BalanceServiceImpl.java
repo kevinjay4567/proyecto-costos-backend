@@ -35,6 +35,7 @@ public class BalanceServiceImpl implements BalanceService {
         return balanceRepository.findAll();
     }
 
+    // TODO: El guardado de la informacion se puede reutilizar
     @Override
     public ResponseEntity<BalanceResponse> store(MultipartFile file) {
         try (InputStream inputStream = file.getInputStream()) {
