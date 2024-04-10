@@ -50,3 +50,37 @@ CREATE TABLE balance
     CONSTRAINT balance_sede_fk FOREIGN KEY (sede_id) REFERENCES sede (id),
     CONSTRAINT balance_subcuenta_fk FOREIGN KEY (subcuenta_id) REFERENCES subcuenta (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+CREATE TABLE datos_persona
+(
+    id     bigserial NOT NULL,
+    sede varchar   NOT NULL,
+    vinculacion varchar NOT NULL,
+    actividad varchar NOT NULL,
+    facultad varchar NOT NULL,
+    programa varchar NOT NULL,
+    promedio FLOAT NOT NULL,
+    nivel varchar NOT NULL,
+    CONSTRAINT datos_persona_pk PRIMARY KEY (id)
+);
+
+CREATE TABLE pta
+(
+    id     bigserial NOT NULL,
+    categoria_docente varchar   NOT NULL,
+    item numeric NOT NULL,
+    actividad_item varchar NOT NULL,
+    sede varchar NOT NULL,
+    tipo varchar NOT NULL,
+    valor bigint NOT NULL,
+    CONSTRAINT pta_pk PRIMARY KEY (id)
+);
+
+CREATE TABLE unimedios
+(
+    id     bigserial NOT NULL,
+    agrupacion varchar   NOT NULL,
+    valor bigint NOT NULL,
+    anho numeric NOT NULL,
+    CONSTRAINT unimedios_pk PRIMARY KEY (id)
+);
